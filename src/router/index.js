@@ -7,7 +7,7 @@ const routes = [
 		name: 'Home',
 		component: Home,
 		meta: {
-			title: 'Stoman - Home',
+			title: 'Safari Adventure',
 		},
 	},
 	{
@@ -19,19 +19,19 @@ const routes = [
 		component: () =>
 			import(/* webpackChunkName: "about" */ '../views/About.vue'),
 		meta: {
-			title: 'Stoman - About',
+			title: 'Safari Adventure - About',
 		},
 	},
 	{
-		path: '/projects',
-		name: 'Projects',
+		path: '/tours',
+		name: 'Tours',
 		// route level code-splitting
 		// this generates a separate chunk (projects.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
 		component: () =>
-			import(/* webpackChunkName: "projects" */ '../views/Projects.vue'),
+			import(/* webpackChunkName: "projects" */ '../views/Tours.vue'),
 		meta: {
-			title: 'Stoman - Projects',
+			title: 'Safari Adventure - Projects',
 		},
 	},
 	{
@@ -45,7 +45,7 @@ const routes = [
 				/* webpackChunkName: "projects" */ '../views/SingleProject.vue'
 			),
 		meta: {
-			title: 'Stoman - Single Project',
+			title: 'Safari Adventure - Single Project',
 		},
 	},
 	{
@@ -57,7 +57,7 @@ const routes = [
 		component: () =>
 			import(/* webpackChunkName: "projects" */ '../views/Contact.vue'),
 		meta: {
-			title: 'Stoman - Contact',
+			title: 'Safari Adventure - Contact',
 		},
 	},
 ];
@@ -74,7 +74,7 @@ export default router;
 
 /**
  * Below code will display the component/active page title
- * Powered by: Nangialai Stoman
+ * Powered by: Safari Adventure Team
  */
 
 // This callback runs before every route change, including on page load.
