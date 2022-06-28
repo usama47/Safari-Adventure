@@ -17,28 +17,6 @@ export default {
 			isOpen: false,
 			theme: '',
 			modal: false,
-			categories: [
-				{
-					id: 1,
-					value: 'web',
-					name: 'Web Application',
-				},
-				{
-					id: 2,
-					value: 'mobile',
-					name: 'Mobile Application',
-				},
-				{
-					id: 3,
-					value: 'ui-ux',
-					name: 'UI/UX Design',
-				},
-				{
-					id: 4,
-					value: 'branding',
-					name: 'Branding & Anim',
-				},
-			],
 		};
 	},
 
@@ -143,13 +121,24 @@ export default {
 			<div
 				class="hidden sm:flex justify-between items-center flex-col md:flex-row"
 			>
-				<!-- Hire me button -->
+				<!-- Login button -->
+				<div class="hidden md:block">
+          <router-link to="/login">
+            <Button
+						title="Login"
+						class="text-md font-general-medium bg-green-500 hover:bg-green-600 text-white shadow-sm rounded-md mx-5 px-5 py-2.5 duration-300"
+						aria-label="Login Button"
+					/>
+          </router-link>
+				</div>
+
+        <!-- Become an Agent button -->
 				<div class="hidden md:block">
 					<Button
-						title="Hire Me"
+						title="Become an Agent"
 						class="text-md font-general-medium bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
 						@click="showModal()"
-						aria-label="Hire Me Button"
+						aria-label="Become an Agent Button"
 					/>
 				</div>
 
@@ -162,12 +151,11 @@ export default {
 			</div>
 		</div>
 
-		<!-- Hire me modal -->
+		<!-- Become an Agent modal -->
 		<HireMeModal
 			:showModal="showModal"
 			:modal="modal"
-			:categories="categories"
-			aria-modal="Hire Me Modal"
+			aria-modal="Become an Agent Modal"
 		/>
 	</nav>
 </template>

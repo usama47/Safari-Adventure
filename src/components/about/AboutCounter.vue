@@ -9,7 +9,7 @@ export default {
 			experienceTitle: 'Years of experience',
 			githubTitle: 'Stars on GitHub',
 			feedbackTitle: 'Positive feedback',
-			projectsTitle: 'Projects completed',
+			projectsTitle: 'Trips completed',
 		};
 	},
 };

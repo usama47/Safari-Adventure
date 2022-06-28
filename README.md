@@ -1,4 +1,4 @@
-# Vuejs & TailwindCSS Portfolio - With Dark Mode
+# Vuejs & TailwindCSS Safari_Adventure - With Dark Mode
 
 A responsive Web App for tours and trips built with Vue.js v3 and Tailwind CSS v3.
 
@@ -23,7 +23,7 @@ git clone https://github.com/usama47/Safari_Adventure
 3. ##### Open the project folder:
 
 ```
-cd vuejs-tailwindcss-portfolio
+cd Safari_Adventure
 ```
 
 4. ##### Install packages and dependencies:
