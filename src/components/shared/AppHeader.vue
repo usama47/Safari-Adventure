@@ -141,6 +141,14 @@ export default {
 						aria-label="Become an Agent Button"
 					/>
 				</div>
+        <div class="hidden md:block">
+					<Button
+						title="Logout"
+						class="text-md ml-5 font-general-medium bg-blue-500 hover:bg-blue-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
+						@click="$store.dispatch('logout')"
+						aria-label="Logout"
+					/>
+				</div>
 
 				<!-- Theme switcher large screen -->
 				<theme-switcher

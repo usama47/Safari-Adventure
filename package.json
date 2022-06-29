@@ -1,5 +1,5 @@
 {
-  "name": "Safari_Adventure",
+  "name": "safari_adventure",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,14 +14,15 @@
     "@vue/cli-plugin-router": "^5.0.4",
     "core-js": "^3.6.5",
     "feather-icons": "^4.28.0",
-    "firebase": "^9.8.4",
+    "firebase": "^9.6.3",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
     "postcss-preset-env": "^7.6.0",
     "vue": "^3.2.35",
     "vue-backtotop": "^1.6.1",
     "vue-router": "^4.0.0-0",
-    "vue3-autocounter": "^1.0.6"
+    "vue3-autocounter": "^1.0.6",
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
     "@vue/cli-service": "~5.0.4",

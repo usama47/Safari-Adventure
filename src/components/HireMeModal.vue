@@ -1,11 +1,22 @@
 <script>
 import feather from 'feather-icons';
 import Button from './reusable/Button.vue';
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
 	props: ['showModal', 'modal', 'categories'],
 	components: { Button },
-	data() {
-		return {};
+  setup () {
+		const register_form = ref({});
+		const store = useStore();
+		const register = () => {
+			store.dispatch('register', register_form.value);
+		}
+		return {
+			register_form,
+			register
+		}
 	},
 	mounted() {
 		feather.replace();
@@ -13,7 +24,6 @@ export default {
 	updated() {
 		feather.replace();
 	},
-	methods: {},
 };
 </script>
 
@@ -54,22 +64,24 @@ export default {
 								</button>
 							</div>
 							<div class="modal-body p-5 w-full h-full">
-								<form class="max-w-xl m-4 text-left">
+								<form @submit.prevent="register" class="max-w-xl m-4 text-left">
 									<div class="mt-0">
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="name"
+                      v-model="register_form.name"
 											name="name"
 											type="text"
 											required=""
-											placeholder="Name"
-											aria-label="Name"
+											placeholder="Type your Name here"
+											aria-label="Full Name"
 										/>
 									</div>
 									<div class="mt-6">
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="email"
+                      v-model="register_form.email"
 											name="email"
 											type="text"
 											required=""
@@ -80,7 +92,20 @@ export default {
                   <div class="mt-6">
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
+											id="password"
+                      v-model="register_form.password"
+											name="password"
+											type="password"
+											required=""
+											placeholder="Password"
+											aria-label="Password"
+										/>
+									</div>
+                  <div class="mt-6">
+										<input
+											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="number"
+                      v-model="register_form.number"
 											name="number"
 											type="number"
 											required=""
@@ -88,29 +113,12 @@ export default {
 											aria-label="Number"
 										/>
 									</div>
-									<!-- <div class="mt-6">
-										<select
-											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
-											id="subject"
-											name="subject"
-											type="text"
-											required=""
-											aria-label="Project Category"
-										>
-											<option
-												v-for="category in categories"
-												:key="category.id"
-												:value="category.value"
-												>{{ category.name }}</option
-											>
-										</select>
-									</div> -->
-
 									<div class="mt-6">
 										<textarea
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
-											id="message"
-											name="message"
+											id="description"
+                      v-model="register_form.decription"
+											name="description"
 											cols="14"
 											rows="6"
 											aria-label="Details"
@@ -124,6 +132,7 @@ export default {
 											class="px-4
 											sm:px-6
 											py-2
+                      m-10
 											sm:py-2.5
 											text-white
 											bg-indigo-500
@@ -131,6 +140,7 @@ export default {
 											rounded-md
 											focus:ring-1 focus:ring-indigo-900 duration-500"
 											type="submit"
+                      value="Register"
 											aria-label="Sign me up"
 										/>
 									</div>
