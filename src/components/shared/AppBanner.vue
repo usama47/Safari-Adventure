@@ -53,7 +53,7 @@ export default {
 		</div>
 
 		<!-- Banner right illustration -->
-		<div class="w-full md:w-2/3 text-right float-right">
+		<div class="w-full md:w-2/3 text-right float-right" style="text-align: -webkit-center;">
 			<img
 				v-if="theme === 'light'"
 				src="@/assets/images/adventurelight.jpg"

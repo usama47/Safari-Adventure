@@ -69,8 +69,8 @@ export default {
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="name"
-                      v-model="register_form.name"
-											name="name"
+                      v-model="register_form.displayName"
+											name="displayName"
 											type="text"
 											required=""
 											placeholder="Type your Name here"
@@ -83,8 +83,8 @@ export default {
 											id="email"
                       v-model="register_form.email"
 											name="email"
-											type="text"
-											required=""
+											type="email"
+											required="true"
 											placeholder="Email"
 											aria-label="Email"
 										/>
@@ -105,28 +105,15 @@ export default {
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="number"
-                      v-model="register_form.number"
-											name="number"
+                      v-model="register_form.phoneNumber"
+											name="phoneNumber"
 											type="number"
 											required=""
 											placeholder="Phone Number"
 											aria-label="Number"
 										/>
 									</div>
-									<div class="mt-6">
-										<textarea
-											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
-											id="description"
-                      v-model="register_form.decription"
-											name="description"
-											cols="14"
-											rows="6"
-											aria-label="Details"
-											placeholder="Write your experience and services you have provided."
-										></textarea>
-									</div>
-
-									<div class="mt-6 pb-4 sm:pb-1">
+									<div class="submit-button sm:pb-1">
 										<Button
 											title="Sign Up"
 											class="px-4
@@ -146,20 +133,6 @@ export default {
 									</div>
 								</form>
 							</div>
-							<div
-								class="modal-footer mt-2 sm:mt-0 py-5 px-8 border0-t text-right"
-							>
-								<Button
-									title="Close"
-									class=" px-4
-									sm:px-6
-									py-2 bg-gray-600 text-primary-light hover:bg-ternary-dark dark:bg-gray-200 dark:text-secondary-dark dark:hover:bg-primary-light
-									rounded-md
-									focus:ring-1 focus:ring-indigo-900 duration-500"
-									@click="showModal()"
-									aria-label="Close Modal"
-								/>
-							</div>
 						</div>
 					</div>
 				</transition>
@@ -171,6 +144,9 @@ export default {
 <style scoped>
 .modal-body {
 	max-height: 500px;
+}
+.submit-button{
+  text-align-last: center;
 }
 .bg-gray-800-opacity {
 	background-color: #2d374850;

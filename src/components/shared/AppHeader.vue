@@ -19,6 +19,11 @@ export default {
 			modal: false,
 		};
 	},
+  computed: {
+   user() {
+    return this.$store.state.user
+    }
+  },
 
 	created() {
 		this.theme = localStorage.getItem('theme') || 'light';
@@ -65,13 +70,13 @@ export default {
 					<router-link to="/"
 						><img
 							v-if="theme === 'light'"
-							src="@/assets/images/logo-dark.svg"
+							src="@/assets/images/logo2.png"
 							class="w-36"
 							alt="Dark Logo"
 						/>
 						<img
 							v-else
-							src="@/assets/images/logo-light.svg"
+							src="@/assets/images/logo2.png"
 							class="w-36"
 							alt="Light Logo"
 						/>
@@ -122,7 +127,7 @@ export default {
 				class="hidden sm:flex justify-between items-center flex-col md:flex-row"
 			>
 				<!-- Login button -->
-				<div class="hidden md:block">
+				<div v-if="!user" class="hidden md:block">
           <router-link to="/login">
             <Button
 						title="Login"
@@ -133,7 +138,7 @@ export default {
 				</div>
 
         <!-- Become an Agent button -->
-				<div class="hidden md:block">
+				<div v-if="!user" class="hidden md:block">
 					<Button
 						title="Become an Agent"
 						class="text-md font-general-medium bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
@@ -141,12 +146,19 @@ export default {
 						aria-label="Become an Agent Button"
 					/>
 				</div>
-        <div class="hidden md:block">
+        <div v-if="user" class="hidden md:block">
 					<Button
 						title="Logout"
 						class="text-md ml-5 font-general-medium bg-blue-500 hover:bg-blue-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
 						@click="$store.dispatch('logout')"
 						aria-label="Logout"
+					/>
+				</div>
+        <div v-if="user" class="hidden md:block">
+					<Button
+						title="Create Package"
+						class="text-md ml-5 font-general-medium bg-orange-500 hover:bg-orange-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
+						aria-label="Create Package"
 					/>
 				</div>
 

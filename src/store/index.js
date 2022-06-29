@@ -4,6 +4,7 @@ import { auth } from '../firebase'
 import { 
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
   signOut 
 } from 'firebase/auth'
 
@@ -49,11 +50,10 @@ export default createStore({
     },
 
     async register ({ commit}, details) {
-       const { email, password, number, name } = details
-       console.log('Details : ',details);
-
+       const { email, password, phoneNumber, displayName } = details
       try {
-        await createUserWithEmailAndPassword(auth, email, password, number, name)
+        await createUserWithEmailAndPassword(auth, email, password)
+        updateProfile(auth.currentUser, {displayName, phoneNumber})
       } catch (error) {
         switch(error.code) {
           case 'auth/email-already-in-use':
@@ -88,19 +88,19 @@ export default createStore({
       router.push('/login')
     },
 
-    fetchUser ({ commit }) {
-      auth.onAuthStateChanged(async user => {
-        if (user === null) {
-          commit('CLEAR_USER')
-        } else {
-          commit('SET_USER', user)
+    // fetchUser ({ commit }) {
+    //   auth.onAuthStateChanged(async user => {
+    //     if (user === null) {
+    //       commit('CLEAR_USER')
+    //     } else {
+    //       commit('SET_USER', user)
 
-          if (router.isReady() && router.currentRoute.value.path === '/login') {
-            router.push('/')
-          }
-        }
-      })
-    }
+    //       if (router.isReady() && router.currentRoute.value.path === '/login') {
+    //         router.push('/')
+    //       }
+    //     }
+    //   })
+    // }
     
   }
 })

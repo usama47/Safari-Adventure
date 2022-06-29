@@ -7,7 +7,7 @@ export default {
 	data: () => {
 		return {
 			experienceTitle: 'Years of experience',
-			githubTitle: 'Stars on GitHub',
+			githubTitle: 'Happy Customers',
 			feedbackTitle: 'Positive feedback',
 			projectsTitle: 'Trips completed',
 		};
