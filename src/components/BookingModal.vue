@@ -1,23 +1,23 @@
 <script>
 import feather from 'feather-icons';
 import Button from './reusable/Button.vue';
-import { ref } from 'vue';
+import emailjs from '@emailjs/browser';
 
 export default {
 	props: ['showBookingModal', 'bookingModal'],
 	components: { Button },
-  setup () {
-		const create_package_form = ref({});
-		const createPackage = (e) => {
-			// store.dispatch('createPackage', create_package_form.value);
-      create_package_form.value = {};
+    methods: {
+    sendEmail(e) {
+      emailjs.sendForm('service_vdbl9zo', 'template_0zyza2b', this.$refs.form, '-9s72DHEOsMUR_G8C')
+        .then((result) => {
+            console.log('SUCCESS!', result.text);
+        }, (error) => {
+            console.log('FAILED...', error.text);
+        });
+        
       e.preventDefault()
-		}
-		return {
-			create_package_form,
-			createPackage
-		}
-	},
+    }
+  },
 	mounted() {
 		feather.replace();
 	},
@@ -64,13 +64,12 @@ export default {
 								</button>
 							</div>
 							<div class="modal-body p-5 w-full h-full">
-								<form @submit.prevent="createPackage" class="max-w-xl m-4 text-left">
+								<form ref="form" @submit.prevent="sendEmail" class="max-w-xl m-4 text-left">
                   <div class="mt-6">
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="customerName"
-                      v-model="create_package_form.customerName"
-											name="customerName"
+											name="customer_name"
 											type="text"
 											required=""
 											placeholder="Full Name"
@@ -81,8 +80,7 @@ export default {
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="contactNumber"
-                      v-model="create_package_form.contactNumber"
-											name="contactNumber"
+											name="contact_number"
 											type="number"
 											required=""
 											placeholder="Contact Number"
@@ -93,8 +91,7 @@ export default {
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="customerEmail"
-                      v-model="create_package_form.customerEmail"
-											name="customerEmail"
+											name="email"
 											type="email"
 											required=""
 											placeholder="Email"
@@ -105,8 +102,7 @@ export default {
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="numberOFPersons"
-                      v-model="create_package_form.numberOFPersons"
-											name="numberOFPersons"
+											name="number_of_persons"
 											type="number"
 											required="true"
 											placeholder="Number oF Persons"
@@ -117,8 +113,7 @@ export default {
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="paymentId"
-                      v-model="create_package_form.paymentId"
-											name="paymentId"
+											name="payment_id"
 											type="text"
 											required=""
 											placeholder="Payment Id"
@@ -129,8 +124,7 @@ export default {
 										<textarea
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="anyMessage"
-											name="anyMessage"
-                      v-model="create_package_form.anyMessage"
+											name="message"
 											cols="14"
 											rows="3"
 											aria-label="Message"
