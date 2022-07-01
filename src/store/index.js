@@ -91,9 +91,7 @@ export default createStore({
        agentName = this.state.user.displayName;
        agentEmail = this.state.user.email;
       }
-      const {packageName,price, description, duration,destination,agentNumber} = details
-      console.log('USer:  ', this.state.user); 
-      console.log('packageName, duration: ', details); 
+      const {packageName, bankAccount, price, description, duration,destination,agentNumber} = details
       try {
         const docRef = await addDoc(collection(db, "tours"), {
           packageName: packageName,
@@ -105,6 +103,7 @@ export default createStore({
           agentNumber:agentNumber,
           agentEmail:agentEmail,
           uniqueKey:uniqueKey,
+          bankAccount:bankAccount
         });
         alert('New Tour Package has been created!!!')
         commit('SET_ID', docRef.id)

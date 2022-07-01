@@ -24,13 +24,16 @@ export default {
         </p>
 				<ul class="leading-loose">
 					<li class="font-general-medium text-ternary-dark dark:text-ternary-light">
-            <span>{{ packages.agentName }} </span>
+            <span>Name: {{ packages.agentName }} </span>
           </li>
           <li class="font-general-regular text-ternary-dark dark:text-ternary-light">
-            <span>{{ packages.agentNumber }}</span>
+            <span>Contact Number: {{ packages.agentNumber }}</span>
           </li>
           <li class="font-general-regular text-ternary-dark dark:text-ternary-light">
-            <span>{{ packages.agentEmail }}</span>
+            <span>Email: {{ packages.agentEmail }}</span>
+          </li>
+          <li v-if="packages.bankAccount" class="font-general-medium text-ternary-dark dark:text-ternary-light">
+            <span>Bank Acoount {{ packages.bankAccount }} </span>
           </li>
           <li class="font-general-regular text-ternary-dark dark:text-ternary-light">
             <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" target="blank"
@@ -102,10 +105,7 @@ export default {
 			</p>
 			<p class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light">
 				<span>Destination: {{ packages.destination }}</span>
-        <span style="float:right;" >Durastion: {{ packages.duration }} </span>
-			</p>
-      <p class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light">
-				{{ packages.description }}
+        <span style="float:right;" >Duration: {{ packages.duration }} </span>
 			</p>
       <p class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light">
 				{{ packages.description }}
