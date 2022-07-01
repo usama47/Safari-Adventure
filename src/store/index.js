@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import router from '../router'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
+import { collection, addDoc } from "firebase/firestore"; 
 import { 
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,14 +11,18 @@ import {
 
 export default createStore({
   state: {
-    user: null
+    user: null,
+    id:null,
+    tours: null
   },
   mutations: {
 
     SET_USER (state, user) {
       state.user = user
     },
-
+    SET_ID (state, id) {
+      state.user = id
+    },
     CLEAR_USER (state) {
       state.user = null
     }
@@ -45,15 +50,15 @@ export default createStore({
       }
 
       commit('SET_USER', auth.currentUser)
-
+      alert('Logged in Successfully Welcome to the Safari Adventures!!!')
       router.push('/')
     },
 
     async register ({ commit}, details) {
-       const { email, password, phoneNumber, displayName } = details
+       const { email, password, displayName } = details
       try {
         await createUserWithEmailAndPassword(auth, email, password)
-        updateProfile(auth.currentUser, {displayName, phoneNumber})
+        updateProfile(auth.currentUser, {displayName})
       } catch (error) {
         switch(error.code) {
           case 'auth/email-already-in-use':
@@ -71,14 +76,46 @@ export default createStore({
           default:
             alert("Something went wrong")
         }
-
         return
       }
-
       commit('SET_USER', auth.currentUser)
-
+      alert('You are successfully registered as an Agent!!!')
       router.push('/')
     },
+
+    async createPackage ({ commit}, details) {
+      var agentName = '';
+      var agentEmail = '';
+      var uniqueKey = (Math.random() ).toString(36).substring(5);
+      if(this.state.user){
+       agentName = this.state.user.displayName;
+       agentEmail = this.state.user.email;
+      }
+      const {packageName,price, description, duration,destination,agentNumber} = details
+      console.log('USer:  ', this.state.user); 
+      console.log('packageName, duration: ', details); 
+      try {
+        const docRef = await addDoc(collection(db, "tours"), {
+          packageName: packageName,
+          price: price,
+          description: description,
+          duration: duration,
+          destination: destination,
+          agentName: agentName,
+          agentNumber:agentNumber,
+          agentEmail:agentEmail,
+          uniqueKey:uniqueKey,
+        });
+        alert('New Tour Package has been created!!!')
+        commit('SET_ID', docRef.id)
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+      router.push('/')
+    },
+
+
+       
 
     async logout ({ commit }) {
       await signOut(auth)

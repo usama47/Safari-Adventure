@@ -1,6 +1,7 @@
 <script>
 import ThemeSwitcher from '../ThemeSwitcher';
 import HireMeModal from '../HireMeModal.vue';
+import CreatePackage from '../CreatePackage.vue';
 import feather from 'feather-icons';
 import AppHeaderLinks from './AppHeaderLinks.vue';
 import Button from '../reusable/Button.vue';
@@ -10,6 +11,7 @@ export default {
 		ThemeSwitcher,
 		HireMeModal,
 		AppHeaderLinks,
+    CreatePackage,
 		Button,
 	},
 	data() {
@@ -17,6 +19,7 @@ export default {
 			isOpen: false,
 			theme: '',
 			modal: false,
+			packageModal: false,
 		};
 	},
   computed: {
@@ -48,6 +51,20 @@ export default {
 					.getElementsByTagName('html')[0]
 					.classList.add('overflow-y-hidden');
 				this.modal = true;
+			}
+		},
+    showPackageModal() {
+			if (this.packageModal) {
+				// Stop screen scrolling
+				document
+					.getElementsByTagName('html')[0]
+					.classList.remove('overflow-y-hidden');
+				this.packageModal = false;
+			} else {
+				document
+					.getElementsByTagName('html')[0]
+					.classList.add('overflow-y-hidden');
+				this.packageModal = true;
 			}
 		},
 	},
@@ -146,6 +163,7 @@ export default {
 						aria-label="Become an Agent Button"
 					/>
 				</div>
+        <!-- Logout button -->
         <div v-if="user" class="hidden md:block">
 					<Button
 						title="Logout"
@@ -154,11 +172,13 @@ export default {
 						aria-label="Logout"
 					/>
 				</div>
+        <!-- Creata a new Package button -->
         <div v-if="user" class="hidden md:block">
 					<Button
 						title="Create Package"
 						class="text-md ml-5 font-general-medium bg-orange-500 hover:bg-orange-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
 						aria-label="Create Package"
+						@click="showPackageModal()"
 					/>
 				</div>
 
@@ -177,6 +197,11 @@ export default {
 			:modal="modal"
 			aria-modal="Become an Agent Modal"
 		/>
+    <CreatePackage
+      :showPackageModal="showPackageModal"
+			:packageModal="packageModal"
+			aria-modal="Create a New Package"
+    />
 	</nav>
 </template>
 

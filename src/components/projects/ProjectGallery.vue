@@ -11,11 +11,11 @@ export default {
 			v-for="projectImage in projectImages"
 			:key="projectImage.id"
 		>
-			<img
+			<!-- <img
 				:src="projectImage.img"
 				class="rounded-xl cursor-pointer shadow-lg sm:shadow-none"
 				alt="{{ projectImage.title }}"
-			/>
+			/> -->
 		</div>
 	</div>
 </template>

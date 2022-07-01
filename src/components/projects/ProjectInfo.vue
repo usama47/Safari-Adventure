@@ -2,7 +2,7 @@
 import feather from 'feather-icons';
 
 export default {
-	props: ['projectInfo'],
+	props: ['packages'],
 
 	mounted() {
 		feather.replace();
@@ -19,34 +19,30 @@ export default {
 		<div class="w-full sm:w-1/3 text-left">
 			<!-- Single project client details -->
 			<div class="mb-7">
-				<p
-					class="font-general-medium text-2xl text-secondary-dark dark:text-secondary-light mb-2"
-				>
-					{{ projectInfo.clientHeading }}
-				</p>
+				<p class="font-general-medium text-2xl text-secondary-dark dark:text-secondary-light mb-2">
+				<b>	Agent information </b>
+        </p>
 				<ul class="leading-loose">
-					<li
-						v-for="info in projectInfo.companyInfos"
-						:key="info"
-						class="font-general-regular text-ternary-dark dark:text-ternary-light"
-					>
-						<span>{{ info.title }}: </span>
-						<a
-							href="#"
-							:class="
-								info.title == 'Website' || info.title == 'Phone'
-									? 'hover:underline cursor-pointer'
-									: ''
-							"
-							aria-label="Project Website and Phone"
-							>{{ info.details }}</a
-						>
-					</li>
+					<li class="font-general-medium text-ternary-dark dark:text-ternary-light">
+            <span>{{ packages.agentName }} </span>
+          </li>
+          <li class="font-general-regular text-ternary-dark dark:text-ternary-light">
+            <span>{{ packages.agentNumber }}</span>
+          </li>
+          <li class="font-general-regular text-ternary-dark dark:text-ternary-light">
+            <span>{{ packages.agentEmail }}</span>
+          </li>
+          <li class="font-general-regular text-ternary-dark dark:text-ternary-light">
+            <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" target="blank"
+              href="https://api.whatsapp.com/send?phone=910000000000&text=Hello this is the starting message">
+             <span>Whatsapp Chat</span> 
+            </a>
+          </li>
 				</ul>
 			</div>
 
 			<!-- Single project objectives -->
-			<div class="mb-7">
+			<!-- <div class="mb-7">
 				<p
 					class="font-general-medium text-2xl text-ternary-dark dark:text-ternary-light mb-2"
 				>
@@ -57,10 +53,10 @@ export default {
 				>
 					{{ projectInfo.objectivesDetails }}
 				</p>
-			</div>
+			</div> -->
 
 			<!-- Single project technologies -->
-			<div class="mb-7">
+			<!-- <div class="mb-7">
 				<p
 					class="font-general-medium text-2xl text-ternary-dark dark:text-ternary-light mb-2"
 				>
@@ -71,10 +67,10 @@ export default {
 				>
 					{{ projectInfo.technologies[0].techs.join(', ') }}
 				</p>
-			</div>
+			</div> -->
 
 			<!-- Single project social sharing -->
-			<div>
+			<!-- <div>
 				<p
 					class="font-general-medium text-2xl text-ternary-dark dark:text-ternary-light mb-2"
 				>
@@ -94,7 +90,7 @@ export default {
 						></i
 					></a>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 		<!-- Single project right section details -->
@@ -102,14 +98,17 @@ export default {
 			<p
 				class="font-general-medium text-primary-dark dark:text-primary-light text-2xl font-bold mb-7"
 			>
-				{{ projectInfo.projectDetailsHeading }}
+				Package Details:
 			</p>
-			<p
-				v-for="projectDetail in projectInfo.projectDetails"
-				:key="projectDetail.id"
-				class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light"
-			>
-				{{ projectDetail.details }}
+			<p class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light">
+				<span>Destination: {{ packages.destination }}</span>
+        <span style="float:right;" >Durastion: {{ packages.duration }} </span>
+			</p>
+      <p class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light">
+				{{ packages.description }}
+			</p>
+      <p class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light">
+				{{ packages.description }}
 			</p>
 		</div>
 	</div>

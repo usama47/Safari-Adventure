@@ -1,14 +1,16 @@
 <script>
 import feather from 'feather-icons';
-import ProjectsFilter from './ProjectsFilter.vue';
+// import ProjectsFilter from './ProjectsFilter.vue';
 import ProjectSingle from './ProjectSingle.vue';
-import projects from '../../data/projects';
+// import projects from '../../data/projects';
+import { db } from '../../firebase';
+import { collection, getDocs } from "firebase/firestore"; 
 
 export default {
-	components: { ProjectSingle, ProjectsFilter },
+	components: { ProjectSingle },
 	data: () => {
 		return {
-			projects,
+      packages: [],
 			projectsHeading: 'Tour Packages',
 			selectedCategory: '',
 			searchProject: '',
@@ -16,35 +18,46 @@ export default {
 	},
 	computed: {
 		// Get the filtered projects
-		filteredProjects() {
-			if (this.selectedCategory) {
-				return this.filterProjectsByCategory();
-			} else if (this.searchProject) {
-				return this.filterProjectsBySearch();
-			}
-			return this.projects;
-		},
+		// filteredProjects() {
+		// 	if (this.selectedCategory) {
+		// 		return this.filterProjectsByCategory();
+		// 	} else if (this.searchProject) {
+		// 		return this.filterProjectsBySearch();
+		// 	}
+		// 	return this.projects;
+		// },
 	},
 	methods: {
-		// Filter projects by category
-		filterProjectsByCategory() {
-			return this.projects.filter((item) => {
-				let category =
-					item.category.charAt(0).toUpperCase() +
-					item.category.slice(1);
-				console.log(category);
-				return category.includes(this.selectedCategory);
-			});
-		},
+		async getPackages() {
+      const tourCollection = (collection(db, 'tours'))
+      let allTourCollection = await getDocs(tourCollection);
+      allTourCollection.forEach((tour) => {
+        this.packages.push(tour.data())
+      });
+      return this.packages;
+    },
+    // Filter projects by category
+		// filterProjectsByCategory() {
+		// 	return this.getPackages.filter((item) => {
+		// 		let category =
+		// 			item.category.charAt(0).toUpperCase() +
+		// 			item.category.slice(1);
+		// 		console.log(category);
+		// 		return this.projects;
+		// 	});
+		// },
 		// Filter projects by title search
-		filterProjectsBySearch() {
-			let project = new RegExp(this.searchProject, 'i');
-			return this.projects.filter((el) => el.title.match(project));
-		},
+		// filterProjectsBySearch() {
+		// 	let project = new RegExp(this.searchProject, 'i');
+		// 	return this.projects.filter((el) => el.title.match(project));
+		// },
 	},
 	mounted() {
 		feather.replace();
 	},
+  created() {
+    this.getPackages();
+  },
 };
 </script>
 
@@ -61,7 +74,7 @@ export default {
 		</div>
 
 		<!-- Filter and search projects -->
-		<div class="mt-10 sm:mt-10">
+		<!-- <div class="mt-10 sm:mt-10">
 			<h3
 				class="font-general-regular
 					text-center text-secondary-dark
@@ -123,22 +136,22 @@ export default {
 						name="name"
 						type="search"
 						required=""
-						placeholder="Search Projects"
+						placeholder="Search Packages"
 						aria-label="Name"
 					/>
 				</div>
 				<ProjectsFilter @filter="selectedCategory = $event" />
 			</div>
-		</div>
+		</div> -->
 
 		<!-- Projects grid -->
 		<div
 			class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 sm:gap-10"
 		>
 			<ProjectSingle
-				v-for="project in filteredProjects"
-				:key="project.id"
-				:project="project"
+				v-for="tourPackage in packages"
+				:key="tourPackage.agentEmail"
+				:project="tourPackage"
 			/>
 		</div>
 	</section>

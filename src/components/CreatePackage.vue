@@ -1,21 +1,22 @@
 <script>
 import feather from 'feather-icons';
 import Button from './reusable/Button.vue';
-import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+// import  Uploader  from './Uploader.vue'
 
 export default {
-	props: ['showModal', 'modal', 'categories'],
+	props: ['showPackageModal', 'packageModal'],
 	components: { Button },
   setup () {
-		const register_form = ref({});
+		const create_package_form = ref({});
 		const store = useStore();
-		const register = () => {
-			store.dispatch('register', register_form.value);
+		const createPackage = () => {
+			store.dispatch('createPackage', create_package_form.value);
 		}
 		return {
-			register_form,
-			register
+			create_package_form,
+			createPackage
 		}
 	},
 	mounted() {
@@ -29,11 +30,11 @@ export default {
 
 <template>
 	<transition name="fade">
-		<div v-show="modal" class="font-general-regular fixed inset-0 z-30">
+		<div v-show="packageModal" class="font-general-regular fixed inset-0 z-30">
 			<!-- Modal body background as backdrop -->
 			<div
-				v-show="modal"
-				@click="showModal()"
+				v-show="packageModal"
+				@click="showPackageModal()"
 				class="bg-filter bg-black bg-opacity-50 fixed inset-0 w-full h-full z-20"
 			></div>
 			<!-- Modal content -->
@@ -42,7 +43,7 @@ export default {
 			>
 				<transition name="fade-up-down">
 					<div
-						v-show="modal"
+						v-show="packageModal"
 						class="modal-wrapper flex items-center z-30"
 					>
 						<div
@@ -54,56 +55,95 @@ export default {
 								<h5
 									class=" text-primary-dark dark:text-primary-light text-xl"
 								>
-									Signup to become an agent and post your own tour plans?
+									Create your own Package by adding the information below
 								</h5>
 								<button
 									class="px-4 text-primary-dark dark:text-primary-light"
-									@click="showModal()"
+									@click="showPackageModal()"
 								>
 									<i data-feather="x"></i>
 								</button>
 							</div>
 							<div class="modal-body p-5 w-full h-full">
-								<form @submit.prevent="register" class="max-w-xl m-4 text-left">
-									<div class="mt-0">
+								<form @submit.prevent="createPackage" class="max-w-xl m-4 text-left">
+                  <div class="mt-6">
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
-											id="name"
-                      v-model="register_form.displayName"
-											name="displayName"
-											type="text"
+											id="agentnumber"
+                      v-model="create_package_form.agentNumber"
+											name="agentnumber"
+											type="number"
 											required=""
-											placeholder="Type your Name here"
-											aria-label="Full Name"
-										/>
-									</div>
-									<div class="mt-6">
-										<input
-											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
-											id="email"
-                      v-model="register_form.email"
-											name="email"
-											type="email"
-											required="true"
-											placeholder="Email"
-											aria-label="Email"
+											placeholder="Type the agent Number"
+											aria-label="Agent Number"
 										/>
 									</div>
                   <div class="mt-6">
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
-											id="password"
-                      v-model="register_form.password"
-											name="password"
-											type="password"
+											id="packageName"
+                      v-model="create_package_form.packageName"
+											name="packageName"
+											type="text"
 											required=""
-											placeholder="Password"
-											aria-label="Password"
+											placeholder="Type the Package Name here"
+											aria-label="Tour Name"
 										/>
 									</div>
+									<div class="mt-6">
+										<input
+											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
+											id="duration"
+                      v-model="create_package_form.duration"
+											name="duration"
+											type="duration"
+											required="true"
+											placeholder="Duration"
+											aria-label="Duration"
+										/>
+									</div>
+                  <div class="mt-6">
+										<input
+											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
+											id="price"
+                      v-model="create_package_form.price"
+											name="price"
+											type="price"
+											required=""
+											placeholder="Price per head"
+											aria-label="price"
+										/>
+									</div>
+                  <div class="mt-6">
+										<input
+											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
+											id="destination"
+                      v-model="create_package_form.destination"
+											name="destination"
+											type="destination"
+											required=""
+											placeholder="Destination"
+											aria-label="Destination"
+										/>
+									</div>
+                  <div class="mt-6">
+										<textarea
+											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
+											id="description"
+											name="description"
+                      v-model="create_package_form.description"
+											cols="14"
+											rows="4"
+											aria-label="Description"
+											placeholder="Write your includings and services here."
+										></textarea>
+									</div>
+                  <!-- <div class="uploader">
+                    <Uploader  />
+                  </div> -->
 									<div class="submit-button sm:pb-1">
 										<Button
-											title="Sign Up"
+											title="Creaete Package"
 											class="px-4
 											sm:px-6
 											py-2
@@ -115,8 +155,8 @@ export default {
 											rounded-md
 											focus:ring-1 focus:ring-indigo-900 duration-500"
 											type="submit"
-                      value="Register"
-											aria-label="Sign me up"
+                      value="CreaetePackage"
+											aria-label="creaetePackage"
 										/>
 									</div>
 								</form>
