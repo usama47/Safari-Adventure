@@ -10,8 +10,10 @@ export default {
   setup () {
 		const register_form = ref({});
 		const store = useStore();
-		const register = () => {
-			store.dispatch('register', register_form.value);
+		const register = (e) => {
+      store.dispatch('register', register_form.value);
+      register_form.value = {};
+      e.preventDefault()
 		}
 		return {
 			register_form,

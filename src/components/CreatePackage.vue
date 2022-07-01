@@ -11,8 +11,10 @@ export default {
   setup () {
 		const create_package_form = ref({});
 		const store = useStore();
-		const createPackage = () => {
+		const createPackage = (e) => {
 			store.dispatch('createPackage', create_package_form.value);
+      create_package_form.value = {};
+      e.preventDefault()
 		}
 		return {
 			create_package_form,
