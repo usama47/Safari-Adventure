@@ -6,12 +6,7 @@ export default {
 	data() {
 		return {
 			socials: [
-				{
-					id: 1,
-					name: 'GitHub',
-					icon: 'github',
-					url: 'https://github.com/',
-				},
+				
 				{
 					id: 2,
 					name: 'Twitter',

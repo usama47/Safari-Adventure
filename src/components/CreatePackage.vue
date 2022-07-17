@@ -3,11 +3,21 @@ import feather from 'feather-icons';
 import Button from './reusable/Button.vue';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
-// import  Uploader  from './Uploader.vue'
+import Upload from './Upload.vue';
+// import ImagePicker from '../src/components/projects/ImagePicker.vue';
 
 export default {
 	props: ['showPackageModal', 'packageModal'],
-	components: { Button },
+	components: { Button,
+	Upload
+	},
+	methods: {
+      getPath (value) {
+		this.create_package_form.imageUrl=value
+		alert(value);
+          console.log(value) // someValue
+      }
+	},
   setup () {
 		const create_package_form = ref({});
 		const store = useStore();
@@ -32,12 +42,14 @@ export default {
 
 <template>
 	<transition name="fade">
-		<div v-show="packageModal" class="font-general-regular fixed inset-0 z-30">
+		<div v-show="packageModal" class="font-general-regular fixed inset-1 z-30  ">
 			<!-- Modal body background as backdrop -->
-			<div
+			<div 
 				v-show="packageModal"
+
 				@click="showPackageModal()"
-				class="bg-filter bg-black bg-opacity-50 fixed inset-0 w-full h-full z-20"
+				
+				class="bg-filter bg-black bg-opacity-50 fixed inset-0 w-auto h-full z-20"
 			></div>
 			<!-- Modal content -->
 			<main
@@ -55,9 +67,9 @@ export default {
 								class="modal-header flex justify-between gap-10 p-5 border-b border-ternary-light dark:border-ternary-dark"
 							>
 								<h5
-									class=" text-primary-dark dark:text-primary-light text-xl"
+									class=" text-primary-dark dark:text-primary-light text-xxl"
 								>
-									Create your own Package by adding the information below
+									Create your own Package by adding the information
 								</h5>
 								<button
 									class="px-4 text-primary-dark dark:text-primary-light"
@@ -66,10 +78,10 @@ export default {
 									<i data-feather="x"></i>
 								</button>
 							</div>
-							<div class="modal-body p-5 w-full h-full">
+							<div class="modal-body  p-5 w-full h-full overflow-scroll">
 								<form @submit.prevent="createPackage" class="max-w-xl text-left">
                   <div class="">
-										<input
+								<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 											id="packageName"
                       v-model="create_package_form.packageName"
@@ -79,7 +91,10 @@ export default {
 											placeholder="Type the Package Name here"
 											aria-label="Tour Name"
 										/>
+					</div><div class="md-3">
+								<Upload @imagePath="getPath"></Upload>
 									</div>
+
 									<div class="mt-6">
 										<input
 											class="w-full px-5 py-2 border-1 border-gray-200 dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
@@ -151,7 +166,21 @@ export default {
 											aria-label="Description"
 											placeholder="Write your includings and services here."
 										></textarea>
+
+									
 									</div>
+									<!-- <div> -->
+                              
+                               <!-- <div>
+                                 <p>Progress: {{uploadValue.toFixed()+"%"}}
+                                 <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
+                               </div>
+                               <div v-if="imageData!=null">                     
+                                   <img class="preview" :src="picture">
+                                   <br>
+                                 <button click="onUpload">Upload</button>
+                               </div>    -->
+                             <!-- </div> -->
                   <!-- <div class="uploader">
                     <Uploader  />
                   </div> -->
@@ -225,4 +254,5 @@ export default {
 .fade-leave-to {
 	opacity: 0;
 }
+
 </style>

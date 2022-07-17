@@ -60,7 +60,7 @@ const routes = [
 			title: 'Safari Adventure - Contact',
 		},
 	},
-  {
+	{
 		path: '/login',
 		name: 'Login',
 		// route level code-splitting
@@ -70,6 +70,18 @@ const routes = [
 			import(/* webpackChunkName: "projects" */ '../views/Login.vue'),
 		meta: {
 			title: 'Safari Adventure - Login',
+		},
+	}, {
+		path: '/admin',
+		name: 'Admin',
+		// route level code-splitting
+		// this generates a separate chunk (projects.[hash].js) for this route
+		// which is lazy-loaded when the route is visited.
+		component: () =>
+			import(/* webpackChunkName: "projects" */ '../components/admin.vue'),
+			
+		meta: {
+			title: 'Safari Adventure - Admin',
 		},
 	},
 ];

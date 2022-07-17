@@ -11,11 +11,11 @@ export default {
 		aria-label="Single Project"
 	>
 		<div>
-			<!-- <img
-				:src="project.img"
+			<img 
+				:src="project.imageUrl"
 				:alt="project.title"
-				class="rounded-t-xl border-none"
-			/> -->
+				class="rounded-t-xl border-none h-40 w-full"
+			/>
 		</div>
 		<div class="text-center px-4 py-6">
 			<p

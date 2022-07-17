@@ -2,15 +2,37 @@
 import feather from 'feather-icons';
 import Button from './reusable/Button.vue';
 import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
 
 export default {
 	props: ['showBookingModal', 'bookingModal'],
 	components: { Button },
     methods: {
     sendEmail(e) {
+		let timerInterval
+      Swal.fire({
+        title: 'Sending Mail',
+        html: 'Please Wait',
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
       emailjs.sendForm('service_vdbl9zo', 'template_0zyza2b', this.$refs.form, '-9s72DHEOsMUR_G8C')
         .then((result) => {
-            console.log('SUCCESS!', result.text);
+            console.log('SUCCESS!', result.status, result.text);
         }, (error) => {
             console.log('FAILED...', error.text);
         });

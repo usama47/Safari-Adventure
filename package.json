@@ -17,15 +17,17 @@
     "feather-icons": "^4.28.0",
     "filepond": "^4.30.4",
     "filepond-plugin-image-preview": "^4.6.11",
-    "firebase": "^9.6.3",
+    "firebase": "^9.8.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
     "postcss-preset-env": "^7.6.0",
+    "sweetalert2": "^11.4.19",
     "vue": "^3.2.35",
     "vue-backtotop": "^1.6.1",
     "vue-filepond": "^7.0.3",
     "vue-router": "^4.0.0-0",
     "vue3-autocounter": "^1.0.6",
+    "vuefire": "^2.2.5",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

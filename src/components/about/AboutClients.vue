@@ -7,47 +7,52 @@ export default {
 	},
 	data: () => {
 		return {
-			clientsHeading: 'Some of the brands I have worked with',
+			clientsHeading: 'Popular Destinations',
 			clients: [
 				{
 					id: 1,
 					title: 'Amazon',
-					img: require('@/assets/images/brands/amazon_gray.png'),
+					img: require('@/assets/images/brands/amazon_color.png'),
 				},
 				{
 					id: 2,
 					title: 'Sony',
-					img: require('@/assets/images/brands/sony_gray.png'),
+					img: require('@/assets/images/brands/fahadhanifff.jpg'),
 				},
 				{
 					id: 3,
-					title: 'Adidas',
-					img: require('@/assets/images/brands/adidas_gray.png'),
+					title: 'hello_skardu1',
+					img: require('@/assets/images/brands/hello_skardu1.jpg'),
 				},
 				{
 					id: 4,
-					title: 'FILA',
-					img: require('@/assets/images/brands/fila_gray.png'),
+					title: 'jamal-mahfud',
+					img: require('@/assets/images/brands/jamal-mahfudz.jpg'),
 				},
+		
 				{
 					id: 5,
-					title: 'NB',
-					img: require('@/assets/images/brands/nb_gray.png'),
+					title: 'pexels',
+					img: require('@/assets/images/brands/pexels1.jpg'),
 				},
 				{
 					id: 6,
 					title: 'SAMSUNG',
-					img: require('@/assets/images/brands/samsung_gray.png'),
+					img: require('@/assets/images/brands/pexels.jpg'),
+
 				},
 				{
 					id: 7,
 					title: 'CANON',
-					img: require('@/assets/images/brands/canon_gray.png'),
+					img: require('@/assets/images/brands/fahadhanifff.jpg'),
+
+
 				},
 				{
 					id: 7,
 					title: 'PUMA',
-					img: require('@/assets/images/brands/puma_gray.png'),
+					img: require('@/assets/images/brands/amazon_color.png'),
+
 				},
 			],
 		};
